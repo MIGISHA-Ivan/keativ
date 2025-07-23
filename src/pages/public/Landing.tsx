@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,10 +14,18 @@ import {
   CheckCircle,
   TrendingUp,
   MessageCircle,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Bot,
+  Globe,
+  Target,
+  Bell,
+  Layers
 } from 'lucide-react';
 
 const Landing = () => {
+  const [currentFeatureSlide, setCurrentFeatureSlide] = useState(0);
+  const [currentBrandSlide, setCurrentBrandSlide] = useState(0);
+
   const features = [
     {
       icon: Calendar,
@@ -32,8 +41,70 @@ const Landing = () => {
       icon: Users,
       title: 'Team Collaboration',
       description: 'Work seamlessly with unlimited team members, shared calendars, and approval workflows.'
+    },
+    {
+      icon: MessageCircle,
+      title: 'Unified Inbox',
+      description: 'Manage all your social media messages and comments from one centralized inbox across all platforms.'
+    },
+    {
+      icon: Bot,
+      title: 'AI Assistant',
+      description: 'Get smart content suggestions, hashtag recommendations, and optimal posting times powered by AI.'
+    },
+    {
+      icon: Globe,
+      title: 'Multi-Platform Support',
+      description: 'Connect and manage Instagram, Twitter, Facebook, LinkedIn, TikTok, and YouTube from one dashboard.'
+    },
+    {
+      icon: Target,
+      title: 'Audience Targeting',
+      description: 'Reach the right audience with advanced targeting options and demographic insights.'
+    },
+    {
+      icon: ImageIcon,
+      title: 'Content Library',
+      description: 'Store and organize all your media files with cloud sync from Google Drive and Dropbox.'
+    },
+    {
+      icon: Bell,
+      title: 'Real-time Notifications',
+      description: 'Stay updated with instant notifications for mentions, comments, and important social media activities.'
     }
   ];
+
+  const brands = [
+    { name: 'Spotify', logo: '🎵' },
+    { name: 'Airbnb', logo: '🏠' },
+    { name: 'Uber', logo: '🚗' },
+    { name: 'Netflix', logo: '🎬' },
+    { name: 'Shopify', logo: '🛍️' },
+    { name: 'Slack', logo: '💬' },
+    { name: 'Zoom', logo: '📹' },
+    { name: 'Dropbox', logo: '📦' }
+  ];
+
+  const featuresPerSlide = 3;
+  const brandsPerSlide = 4;
+  const totalFeatureSlides = Math.ceil(features.length / featuresPerSlide);
+  const totalBrandSlides = Math.ceil(brands.length / brandsPerSlide);
+
+  // Auto-scroll features every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFeatureSlide((prev) => (prev + 1) % totalFeatureSlides);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [totalFeatureSlides]);
+
+  // Auto-scroll brands every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBrandSlide((prev) => (prev + 1) % totalBrandSlides);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [totalBrandSlides]);
 
   const benefits = [
     'Schedule unlimited posts across all platforms',
@@ -193,20 +264,49 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
-                <CardContent className="p-8 text-center">
-                  <div className="bg-red-100 p-4 rounded-2xl w-fit mx-auto mb-6 group-hover:bg-red-500 transition-colors duration-300">
-                    <feature.icon className="h-8 w-8 text-red-600 group-hover:text-white transition-colors duration-300" />
+          {/* Features Carousel */}
+          <div className="relative mb-16">
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentFeatureSlide * 100}%)` }}
+              >
+                {Array.from({ length: totalFeatureSlides }, (_, slideIndex) => (
+                  <div key={slideIndex} className="w-full flex-shrink-0">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      {features
+                        .slice(slideIndex * featuresPerSlide, (slideIndex + 1) * featuresPerSlide)
+                        .map((feature, index) => (
+                          <Card key={index} className="border-0 shadow-sm">
+                            <CardContent className="p-8 text-center">
+                              <div className="bg-red-100 p-4 rounded-2xl w-fit mx-auto mb-6">
+                                <feature.icon className="h-8 w-8 text-red-600" />
+                              </div>
+                              <h3 className="font-heading text-xl font-semibold text-gray-900 mb-4">
+                                {feature.title}
+                              </h3>
+                              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-gray-900 mb-4">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+              </div>
+            </div>
+            
+            {/* Feature Pagination Dots */}
+            <div className="flex justify-center space-x-2 mt-8">
+              {Array.from({ length: totalFeatureSlides }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentFeatureSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+                    index === currentFeatureSlide ? 'bg-red-500' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Benefits List */}
@@ -258,10 +358,43 @@ const Landing = () => {
           <h2 className="font-heading text-2xl font-bold text-gray-900 mb-8">
             Trusted by growing brands worldwide
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-40">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="h-12 bg-gray-300 rounded-lg"></div>
-            ))}
+          
+          {/* Brands Carousel */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentBrandSlide * 100}%)` }}
+              >
+                {Array.from({ length: totalBrandSlides }, (_, slideIndex) => (
+                  <div key={slideIndex} className="w-full flex-shrink-0">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                      {brands
+                        .slice(slideIndex * brandsPerSlide, (slideIndex + 1) * brandsPerSlide)
+                        .map((brand, index) => (
+                          <div key={index} className="bg-white rounded-lg shadow-sm p-6 flex flex-col items-center justify-center">
+                            <div className="text-3xl mb-2">{brand.logo}</div>
+                            <div className="font-semibold text-gray-700">{brand.name}</div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Brand Pagination Dots */}
+            <div className="flex justify-center space-x-2 mt-6">
+              {Array.from({ length: totalBrandSlides }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentBrandSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                    index === currentBrandSlide ? 'bg-red-500' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
