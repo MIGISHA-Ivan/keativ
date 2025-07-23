@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Zenith Brand Colors */
+  --zenith-text: #2D3748;
+  --zenith-background: #FFFFFF;
+  --zenith-primary: #EF4444;
+  --zenith-secondary: #8B5CF6;
+  --zenith-accent: #F3F4F6;
+  
+  /* shadcn/ui variables */
+  --background: 0 0% 100%;
+  --foreground: 210 40% 22%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 40% 22%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 40% 22%;
+  --primary: 0 84% 60%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 258 90% 66%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 220 14% 96%;
+  --accent-foreground: 210 40% 22%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 0 84% 60%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    font-family: 'Poppins', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
+  }
+}
+
+@layer utilities {
+  .font-body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .font-heading {
+    font-family: 'Roboto Slab', serif;
+  }
+  .text-zenith-primary {
+    color: var(--zenith-primary);
+  }
+  .text-zenith-secondary {
+    color: var(--zenith-secondary);
+  }
+  .text-zenith-text {
+    color: var(--zenith-text);
+  }
+  .bg-zenith-accent {
+    background-color: var(--zenith-accent);
+  }
+  .bg-zenith-primary {
+    background-color: var(--zenith-primary);
+  }
+  .bg-zenith-secondary {
+    background-color: var(--zenith-secondary);
+  }
+}
