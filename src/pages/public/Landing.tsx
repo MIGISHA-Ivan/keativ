@@ -97,6 +97,7 @@ const Landing = () => {
 
   const featuresPerSlide = 3;
   const brandsPerSlide = 4;
+  const totalFeatureSlides = Math.ceil(features.length / featuresPerSlide);
   const integrations = [
     { name: 'Gmail', logo: 'Gmail', description: 'Email management' },
     { name: 'Loom', logo: 'Loom', description: 'Video feedback & communication' },
