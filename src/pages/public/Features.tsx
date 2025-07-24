@@ -148,27 +148,100 @@ const Features = () => {
       {/* Platform Support */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="relative">
+          <div className="relative min-h-[400px] flex items-center justify-center">
             <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4 relative z-10">
               Connect All Your Favorite Platforms
             </h2>
             <p className="text-xl text-gray-600 mb-12 relative z-10">
-              Keativ supports all major social media platforms, so you can manage everything from one dashboard.
+              Keativ supports all major social media platforms,<br />so you can manage everything from one dashboard.
             </p>
             
-            {/* Platforms arranged around the text */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-96 h-96">
+            {/* Platforms arranged in a circle around the text */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="relative w-[500px] h-[500px]">
                 {[
-                  { name: 'Instagram', color: '#E4405F', position: 'top-0 left-1/2 transform -translate-x-1/2' },
-                  { name: 'Twitter', color: '#1DA1F2', position: 'top-8 right-8' },
-                  { name: 'Facebook', color: '#1877F2', position: 'top-1/2 right-0 transform -translate-y-1/2' },
-                  { name: 'LinkedIn', color: '#0A66C2', position: 'bottom-8 right-8' },
-                  { name: 'TikTok', color: '#000000', position: 'bottom-0 left-1/2 transform -translate-x-1/2' },
-                  { name: 'YouTube', color: '#FF0000', position: 'bottom-8 left-8' },
-                  { name: 'Pinterest', color: '#BD081C', position: 'top-1/2 left-0 transform -translate-y-1/2' },
-                  { name: 'Snapchat', color: '#FFFC00', position: 'top-8 left-8' }
-                ].map((platform, index) => (
+                  { name: 'Instagram', color: '#E4405F', logo: '📷' },
+                  { name: 'Twitter', color: '#1DA1F2', logo: '🐦' },
+                  { name: 'Facebook', color: '#1877F2', logo: '👥' },
+                  { name: 'LinkedIn', color: '#0A66C2', logo: '💼' },
+                  { name: 'TikTok', color: '#000000', logo: '🎵' },
+                  { name: 'YouTube', color: '#FF0000', logo: '📺' },
+                  { name: 'Pinterest', color: '#BD081C', logo: '📌' },
+                  { name: 'Snapchat', color: '#FFFC00', logo: '👻' }
+                ].map((platform, index) => {
+                  const angle = (index * 45) * (Math.PI / 180); // 45 degrees apart
+                  const radius = 200;
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  
+                  return (
+                    <div
+                      key={platform.name}
+                      className="absolute w-20 h-20 rounded-full flex items-center justify-center shadow-lg animate-pulse"
+                      style={{ 
+                        backgroundColor: `${platform.color}20`,
+                        left: `calc(50% + ${x}px - 40px)`,
+                        top: `calc(50% + ${y}px - 40px)`,
+                        animationDelay: `${index * 0.2}s`
+                      }}
+                    >
+                      <div 
+                        className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl"
+                        style={{ backgroundColor: platform.color }}
+                      >
+                        {platform.logo}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            {/* Curved connecting lines */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <svg width="500" height="500" className="opacity-20">
+                <circle 
+                  cx="250" 
+                  cy="250" 
+                  r="200" 
+                  fill="none" 
+                  stroke="#ef4444" 
+                  strokeWidth="2" 
+                  strokeDasharray="10,5"
+                  className="animate-spin"
+                  style={{ animationDuration: '20s' }}
+                />
+              </svg>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center mt-20">
+            {[
+              { name: 'Instagram', color: '#E4405F', logo: '📷' },
+              { name: 'Twitter', color: '#1DA1F2', logo: '🐦' },
+              { name: 'Facebook', color: '#1877F2', logo: '👥' },
+              { name: 'LinkedIn', color: '#0A66C2', logo: '💼' },
+              { name: 'TikTok', color: '#000000', logo: '🎵' },
+              { name: 'YouTube', color: '#FF0000', logo: '📺' }
+            ].map((platform, index) => (
+              <div key={index} className="text-center">
+                <div 
+                  className="w-16 h-16 rounded-xl mx-auto mb-3 flex items-center justify-center text-white text-2xl"
+                  style={{ backgroundColor: platform.color }}
+                >
+                  {platform.logo}
+                </div>
+                <p className="text-sm font-medium text-gray-700">{platform.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Features;
                   <div
                     key={platform.name}
                     className={`absolute ${platform.position} w-16 h-16 rounded-xl flex items-center justify-center shadow-lg animate-pulse`}

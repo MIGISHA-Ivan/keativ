@@ -438,34 +438,31 @@ const Landing = () => {
             <span className="text-red-500">tools in seconds</span>
           </h2>
           
-          <div className="relative mt-16">
-            {/* Integration Icons */}
-            <div className="flex justify-center items-center space-x-8 mb-8">
-              {integrations.map((integration, index) => {
-                const isActive = index === currentIntegration;
-                const distance = Math.abs(index - currentIntegration);
-                const scale = isActive ? 1 : Math.max(0.6, 1 - distance * 0.2);
-                const opacity = isActive ? 1 : Math.max(0.3, 1 - distance * 0.3);
-                
-                return (
-                  <div
-                    key={integration.name}
-                    className={`transition-all duration-500 ${
-                      isActive ? 'z-10' : 'z-0'
-                    }`}
-                    style={{
-                      transform: `scale(${scale})`,
-                      opacity: opacity
-                    }}
-                  >
-                    <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${
-                      isActive ? 'bg-red-500 text-white shadow-lg' : 'bg-white border border-gray-200'
-                    }`}>
-                      <span className="font-bold text-sm">{integration.logo}</span>
+          <div className="relative mt-16 overflow-hidden">
+            {/* Horizontal Scrolling Integration Icons */}
+            <div className="flex justify-center items-center mb-8">
+              <div className="flex space-x-6 transition-transform duration-500 ease-in-out"
+                   style={{ transform: `translateX(-${currentIntegration * 120}px)` }}>
+                {[...integrations, ...integrations, ...integrations].map((integration, index) => {
+                  const actualIndex = index % integrations.length;
+                  const isMiddle = index === currentIntegration + integrations.length;
+                  
+                  return (
+                    <div
+                      key={`${integration.name}-${index}`}
+                      className={`flex-shrink-0 transition-all duration-500 ${
+                        isMiddle ? 'scale-110 z-10' : 'scale-90 z-0'
+                      }`}
+                    >
+                      <div className={`w-20 h-20 rounded-2xl flex items-center justify-center shadow-md ${
+                        isMiddle ? 'bg-red-500 text-white shadow-lg' : 'bg-white border border-gray-200'
+                      }`}>
+                        <span className="font-bold text-sm">{integration.logo}</span>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
             
             {/* Active Integration Info */}

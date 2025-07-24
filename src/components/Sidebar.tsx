@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +19,6 @@ import {
   Image,
   Users,
   Layers,
-  User,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -79,6 +79,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
       name: 'Social Sets',
       href: '/dashboard/social-sets',
       icon: Layers,
+    },
+    {
+      name: 'Settings',
+      href: '/dashboard/settings',
+      icon: User,
     },
   ];
 

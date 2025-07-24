@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { 
   Share2, 
   Bell, 
@@ -26,10 +27,13 @@ const Header = () => {
         <div className="flex items-center space-x-6">
           <div className="hidden md:flex items-center space-x-2">
             <span className="text-sm text-gray-500">Active Set:</span>
-            <Button variant="outline" size="sm">
+            <Badge variant="outline" className="px-3 py-1">
               {activeSocialSet?.name || 'No Set Selected'}
-              <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
+            </Badge>
+          </div>
+          
+          <div className="text-sm text-gray-500">
+            {activeSocialSet?.platforms.filter(p => p.isConnected).length || 0} platforms connected
           </div>
           
           <Button variant="ghost" size="sm">
