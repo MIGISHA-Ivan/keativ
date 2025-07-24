@@ -23,7 +23,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  User
+  User,
+  Settings
 } from 'lucide-react';
 import { RootState } from '../redux/store';
 import { logout } from '../redux/slices/authSlice';
@@ -84,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
     {
       name: 'Settings',
       href: '/dashboard/settings',
-      icon: User,
+      icon: Settings,
     },
   ];
 
