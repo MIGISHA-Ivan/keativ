@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <Share2 className="h-6 w-6 text-red-500" />
               <span className="font-heading text-lg font-bold text-gray-900">
-                Zenith
+                Keativ
               </span>
             </div>
             <p className="text-sm text-gray-600">
@@ -71,7 +71,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500">
-            © 2025 Zenith. All rights reserved.
+            © 2025 Keativ. All rights reserved.
           </p>
         </div>
       </div>

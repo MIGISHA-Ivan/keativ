@@ -148,14 +148,46 @@ const Features = () => {
       {/* Platform Support */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">
-            Connect All Your Favorite Platforms
-          </h2>
-          <p className="text-xl text-gray-600 mb-12">
-            Zenith supports all major social media platforms, so you can manage everything from one dashboard.
-          </p>
+          <div className="relative">
+            <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4 relative z-10">
+              Connect All Your Favorite Platforms
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 relative z-10">
+              Keativ supports all major social media platforms, so you can manage everything from one dashboard.
+            </p>
+            
+            {/* Platforms arranged around the text */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative w-96 h-96">
+                {[
+                  { name: 'Instagram', color: '#E4405F', position: 'top-0 left-1/2 transform -translate-x-1/2' },
+                  { name: 'Twitter', color: '#1DA1F2', position: 'top-8 right-8' },
+                  { name: 'Facebook', color: '#1877F2', position: 'top-1/2 right-0 transform -translate-y-1/2' },
+                  { name: 'LinkedIn', color: '#0A66C2', position: 'bottom-8 right-8' },
+                  { name: 'TikTok', color: '#000000', position: 'bottom-0 left-1/2 transform -translate-x-1/2' },
+                  { name: 'YouTube', color: '#FF0000', position: 'bottom-8 left-8' },
+                  { name: 'Pinterest', color: '#BD081C', position: 'top-1/2 left-0 transform -translate-y-1/2' },
+                  { name: 'Snapchat', color: '#FFFC00', position: 'top-8 left-8' }
+                ].map((platform, index) => (
+                  <div
+                    key={platform.name}
+                    className={`absolute ${platform.position} w-16 h-16 rounded-xl flex items-center justify-center shadow-lg animate-pulse`}
+                    style={{ 
+                      backgroundColor: `${platform.color}20`,
+                      animationDelay: `${index * 0.2}s`
+                    }}
+                  >
+                    <div 
+                      className="w-8 h-8 rounded-lg"
+                      style={{ backgroundColor: platform.color }}
+                    ></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center mt-20">
             {[
               { name: 'Instagram', color: '#E4405F' },
               { name: 'Twitter', color: '#1DA1F2' },

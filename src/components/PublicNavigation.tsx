@@ -20,7 +20,7 @@ const PublicNavigation = () => {
             <Link to="/" className="flex items-center space-x-2">
               <Share2 className="h-8 w-8 text-red-500" />
               <span className="font-heading text-xl font-bold text-gray-900">
-                Zenith
+                Keativ
               </span>
             </Link>
           </div>

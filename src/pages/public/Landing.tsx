@@ -75,20 +75,37 @@ const Landing = () => {
   ];
 
   const brands = [
-    { name: 'Spotify', logo: '🎵' },
-    { name: 'Airbnb', logo: '🏠' },
-    { name: 'Uber', logo: '🚗' },
-    { name: 'Netflix', logo: '🎬' },
-    { name: 'Shopify', logo: '🛍️' },
-    { name: 'Slack', logo: '💬' },
-    { name: 'Zoom', logo: '📹' },
-    { name: 'Dropbox', logo: '📦' }
+    // First row - moving right
+    [
+      { name: 'Netflix', logo: 'NETFLIX' },
+      { name: 'Xbox', logo: 'XBOX' },
+      { name: 'Disney+', logo: 'Disney+' },
+      { name: 'YouTube', logo: 'YouTube' },
+      { name: 'Hulu', logo: 'hulu' },
+      { name: 'PlayStation', logo: 'PlayStation' }
+    ],
+    // Second row - moving left
+    [
+      { name: 'Apple TV+', logo: 'Apple TV+' },
+      { name: 'Moonlight', logo: 'MOONLIGHT' },
+      { name: 'FuboTV', logo: 'fuboTV' },
+      { name: 'Prime Video', logo: 'Prime Video' },
+      { name: 'Paramount+', logo: 'Paramount+' },
+      { name: 'HBO Max', logo: 'HBO Max' }
+    ]
   ];
 
   const featuresPerSlide = 3;
   const brandsPerSlide = 4;
-  const totalFeatureSlides = Math.ceil(features.length / featuresPerSlide);
-  const totalBrandSlides = Math.ceil(brands.length / brandsPerSlide);
+  const integrations = [
+    { name: 'Gmail', logo: 'Gmail', description: 'Email management' },
+    { name: 'Loom', logo: 'Loom', description: 'Video feedback & communication' },
+    { name: 'Notion', logo: 'Notion', description: 'All-in-one workspace' },
+    { name: 'Outlook', logo: 'Outlook', description: 'Email & calendar' },
+    { name: 'Slack', logo: 'Slack', description: 'Team communication' },
+    { name: 'Trello', logo: 'Trello', description: 'Project management' },
+    { name: 'Zoom', logo: 'Zoom', description: 'Video conferencing' }
+  ];
 
   // Auto-scroll features every 4 seconds
   useEffect(() => {
@@ -98,13 +115,26 @@ const Landing = () => {
     return () => clearInterval(interval);
   }, [totalFeatureSlides]);
 
-  // Auto-scroll brands every 3 seconds
+  const [currentIntegration, setCurrentIntegration] = useState(2); // Start with middle item (Notion)
+  const [brandRow1Position, setBrandRow1Position] = useState(0);
+  const [brandRow2Position, setBrandRow2Position] = useState(0);
+
+  // Auto-scroll integrations every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentBrandSlide((prev) => (prev + 1) % totalBrandSlides);
+      setCurrentIntegration((prev) => (prev + 1) % integrations.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [totalBrandSlides]);
+  }, [integrations.length]);
+
+  // Auto-scroll brand rows continuously
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBrandRow1Position((prev) => prev - 1);
+      setBrandRow2Position((prev) => prev + 1);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
 
   const benefits = [
     'Schedule unlimited posts across all platforms',
@@ -353,47 +383,98 @@ const Landing = () => {
       </section>
 
       {/* Social Proof */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gray-900 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-8">
+          <h2 className="font-heading text-3xl font-bold text-white mb-12">
             Trusted by growing brands worldwide
           </h2>
           
-          {/* Brands Carousel */}
-          <div className="relative">
-            <div className="overflow-hidden">
+          {/* Brand Rows */}
+          <div className="space-y-8">
+            {/* First Row - Moving Right */}
+            <div className="relative overflow-hidden">
               <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentBrandSlide * 100}%)` }}
+                className="flex space-x-12 animate-none"
+                style={{ 
+                  transform: `translateX(${brandRow1Position}px)`,
+                  width: 'fit-content'
+                }}
               >
-                {Array.from({ length: totalBrandSlides }, (_, slideIndex) => (
-                  <div key={slideIndex} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                      {brands
-                        .slice(slideIndex * brandsPerSlide, (slideIndex + 1) * brandsPerSlide)
-                        .map((brand, index) => (
-                          <div key={index} className="bg-white rounded-lg shadow-sm p-6 flex flex-col items-center justify-center">
-                            <div className="text-3xl mb-2">{brand.logo}</div>
-                            <div className="font-semibold text-gray-700">{brand.name}</div>
-                          </div>
-                        ))}
-                    </div>
+                {[...brands[0], ...brands[0], ...brands[0]].map((brand, index) => (
+                  <div key={index} className="flex-shrink-0 w-32 h-32 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center px-2">{brand.logo}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            {/* Brand Pagination Dots */}
-            <div className="flex justify-center space-x-2 mt-6">
-              {Array.from({ length: totalBrandSlides }, (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentBrandSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                    index === currentBrandSlide ? 'bg-red-500' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
+            {/* Second Row - Moving Left */}
+            <div className="relative overflow-hidden">
+              <div 
+                className="flex space-x-12 animate-none"
+                style={{ 
+                  transform: `translateX(${brandRow2Position}px)`,
+                  width: 'fit-content'
+                }}
+              >
+                {[...brands[1], ...brands[1], ...brands[1]].map((brand, index) => (
+                  <div key={index} className="flex-shrink-0 w-32 h-32 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center px-2">{brand.logo}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Integrations Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+            Integrate with your existing
+            <br />
+            <span className="text-red-500">tools in seconds</span>
+          </h2>
+          
+          <div className="relative mt-16">
+            {/* Integration Icons */}
+            <div className="flex justify-center items-center space-x-8 mb-8">
+              {integrations.map((integration, index) => {
+                const isActive = index === currentIntegration;
+                const distance = Math.abs(index - currentIntegration);
+                const scale = isActive ? 1 : Math.max(0.6, 1 - distance * 0.2);
+                const opacity = isActive ? 1 : Math.max(0.3, 1 - distance * 0.3);
+                
+                return (
+                  <div
+                    key={integration.name}
+                    className={`transition-all duration-500 ${
+                      isActive ? 'z-10' : 'z-0'
+                    }`}
+                    style={{
+                      transform: `scale(${scale})`,
+                      opacity: opacity
+                    }}
+                  >
+                    <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${
+                      isActive ? 'bg-red-500 text-white shadow-lg' : 'bg-white border border-gray-200'
+                    }`}>
+                      <span className="font-bold text-sm">{integration.logo}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            {/* Active Integration Info */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                {integrations[currentIntegration].name}
+              </h3>
+              <p className="text-gray-600">
+                {integrations[currentIntegration].description}
+              </p>
             </div>
           </div>
         </div>
