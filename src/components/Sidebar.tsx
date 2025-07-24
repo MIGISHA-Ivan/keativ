@@ -22,7 +22,8 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-  ChevronDown
+  ChevronDown,
+  User
 } from 'lucide-react';
 import { RootState } from '../redux/store';
 import { logout } from '../redux/slices/authSlice';

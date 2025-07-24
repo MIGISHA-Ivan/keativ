@@ -30,7 +30,7 @@ export interface Post {
   content: string;
   mediaUrls: string[];
   platforms: string[];
-  scheduledDate: Date;
+  scheduledDate: string;
   status: 'draft' | 'scheduled' | 'published' | 'failed';
   socialSetId: string;
   hashtags: string[];
@@ -67,7 +67,7 @@ export interface Message {
   platform: string;
   from: string;
   content: string;
-  timestamp: Date;
+  timestamp: string;
   isRead: boolean;
   avatar?: string;
 }
@@ -78,7 +78,7 @@ export interface MediaItem {
   url: string;
   type: 'image' | 'video';
   size: number;
-  uploadedAt: Date;
+  uploadedAt: string;
   source: 'local' | 'gdrive' | 'dropbox';
 }
 
@@ -88,5 +88,5 @@ export interface Collaborator {
   email: string;
   role: 'admin' | 'editor' | 'viewer';
   avatar?: string;
-  lastActive: Date;
+  lastActive: string;
 }

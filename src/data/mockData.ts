@@ -69,7 +69,7 @@ export const mockPosts: Post[] = [
       'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     platforms: ['instagram', 'facebook'],
-    scheduledDate: new Date('2025-01-20T14:30:00'),
+    scheduledDate: new Date('2025-01-20T14:30:00').toISOString(),
     status: 'scheduled',
     socialSetId: '1',
     hashtags: ['#SummerCollection', '#Sustainable', '#Design'],
@@ -83,7 +83,7 @@ export const mockPosts: Post[] = [
       'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     platforms: ['instagram', 'twitter'],
-    scheduledDate: new Date('2025-01-18T16:00:00'),
+    scheduledDate: new Date('2025-01-18T16:00:00').toISOString(),
     status: 'published',
     socialSetId: '1',
     hashtags: ['#BehindTheScenes', '#DesignProcess', '#Creative']
@@ -94,7 +94,7 @@ export const mockPosts: Post[] = [
     content: 'Start your week with creativity and passion! What are you working on today? 💪 #MondayMotivation #Creative #WorkLife',
     mediaUrls: [],
     platforms: ['twitter', 'linkedin'],
-    scheduledDate: new Date('2025-01-22T09:00:00'),
+    scheduledDate: new Date('2025-01-22T09:00:00').toISOString(),
     status: 'draft',
     socialSetId: '1',
     hashtags: ['#MondayMotivation', '#Creative', '#WorkLife']
@@ -167,7 +167,7 @@ export const mockMessages: Message[] = [
     platform: 'Instagram',
     from: 'john_doe_design',
     content: 'Love your latest collection! Where can I purchase?',
-    timestamp: new Date('2025-01-16T10:30:00'),
+    timestamp: new Date('2025-01-16T10:30:00').toISOString(),
     isRead: false,
     avatar: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=400'
   },
@@ -176,7 +176,7 @@ export const mockMessages: Message[] = [
     platform: 'Twitter',
     from: 'creative_mind',
     content: 'Your design process video was amazing! Thanks for sharing.',
-    timestamp: new Date('2025-01-16T08:15:00'),
+    timestamp: new Date('2025-01-16T08:15:00').toISOString(),
     isRead: true,
     avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400'
   }
@@ -189,7 +189,7 @@ export const mockMediaItems: MediaItem[] = [
     url: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     size: 2345000,
-    uploadedAt: new Date('2025-01-15T14:20:00'),
+    uploadedAt: new Date('2025-01-15T14:20:00').toISOString(),
     source: 'local'
   },
   {
@@ -198,7 +198,7 @@ export const mockMediaItems: MediaItem[] = [
     url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     size: 1876000,
-    uploadedAt: new Date('2025-01-14T16:45:00'),
+    uploadedAt: new Date('2025-01-14T16:45:00').toISOString(),
     source: 'gdrive'
   },
   {
@@ -207,7 +207,7 @@ export const mockMediaItems: MediaItem[] = [
     url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
     type: 'video',
     size: 5678000,
-    uploadedAt: new Date('2025-01-13T11:30:00'),
+    uploadedAt: new Date('2025-01-13T11:30:00').toISOString(),
     source: 'dropbox'
   }
 ];
@@ -219,7 +219,7 @@ export const mockCollaborators: Collaborator[] = [
     email: 'michael@creativestudio.com',
     role: 'editor',
     avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
-    lastActive: new Date('2025-01-16T15:30:00')
+    lastActive: new Date('2025-01-16T15:30:00').toISOString()
   },
   {
     id: '2',
@@ -227,6 +227,6 @@ export const mockCollaborators: Collaborator[] = [
     email: 'emma@creativestudio.com',
     role: 'viewer',
     avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400',
-    lastActive: new Date('2025-01-16T09:15:00')
+    lastActive: new Date('2025-01-16T09:15:00').toISOString()
   }
 ];

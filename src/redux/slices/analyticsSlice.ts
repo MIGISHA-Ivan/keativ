@@ -7,8 +7,8 @@ interface AnalyticsState {
   isLoading: boolean;
   error: string | null;
   dateRange: {
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
   };
 }
 
@@ -17,8 +17,8 @@ const initialState: AnalyticsState = {
   isLoading: false,
   error: null,
   dateRange: {
-    start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
-    end: new Date(),
+    start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
+    end: new Date().toISOString(),
   },
 };
 
@@ -30,7 +30,10 @@ const analyticsSlice = createSlice({
       state.data = action.payload;
     },
     setDateRange: (state, action: PayloadAction<{ start: Date; end: Date }>) => {
-      state.dateRange = action.payload;
+      state.dateRange = {
+        start: action.payload.start.toISOString(),
+        end: action.payload.end.toISOString(),
+      };
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
